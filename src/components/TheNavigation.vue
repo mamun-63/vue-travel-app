@@ -1,5 +1,6 @@
 <template>
   <nav id="nav">
+    <p class="logo">The Vue  School Travel App</p>
     <ul class="nav-links">
       <li class="links">
         <router-link to='/'>Home</router-link>
