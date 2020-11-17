@@ -17,13 +17,20 @@ import store from "../store";
 export default {
   data() {
     return {
-      destinationId: this.$route.params.id
+      // slug: this.$route.params.slug
+    }
+  },
+  // loosely coupled 
+  props: {
+    slug: {
+      type: String,
+      required: true,
     }
   },
   computed: {
     destination() {
       return store.destinations.find(
-        destination => destination.id === this.destinationId
+        destination => destination.slug === this.slug
       );
     }
   }

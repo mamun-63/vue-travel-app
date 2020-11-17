@@ -20,18 +20,21 @@ const routes = [
     // magic comment to see the component loading in Network tab
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    props: true,
   },
   {
-    path: '/details/:id',
+    path: '/details/:slug',
     name: 'DestinationDetails',
     component: () =>
       import(
         /* webpackChunkName: "DestinationDetails" */ '../views/DestinationDetails.vue'
       ),
+    props: true,
   },
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   linkExactActiveClass: 'vue-router-active-class',
   routes,
 })

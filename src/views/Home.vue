@@ -11,7 +11,7 @@
         </router-link>
         <figure>
           <router-link
-            :to="{ name: 'DestinationDetails', params: { id: destination.id } }"
+            :to="{ name: 'DestinationDetails', params: { slug: destination.slug } }"
           >
             <img
               :src="require(`../assets/${destination.image}`)"
