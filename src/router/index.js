@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,29 @@ const routes = [
           ),
       },
     ],
+
+    // Navigation Guards
+    // http://localhost:8080/destinaton/mexico  // this will not work nowas mexico is not matching
+    beforeEnter: (to, from, next) => {
+      const exists = store.destinations.find(
+        destination => destination.slug === to.params.slug
+      )
+      if (exists) {
+        next()
+      } else {
+        next({ name: 'notFound' })
+      }
+    },
+  },
+
+  // path: '*' matches any routes / so need to put at the end / the problem is it checks after it loads the path/ so it has possibility to matches
+  // thats why we need to use Vue Navigation Guards / like Vue life cycle hooks
+  {
+    path: '/404',
+    alias: '*', // we can directly put * to path / but it shows warning
+    name: 'notFound',
+    component: () =>
+      import(/* webpackChunkName: "NotFound" */ '../views/NotFound.vue'),
   },
 ]
 
