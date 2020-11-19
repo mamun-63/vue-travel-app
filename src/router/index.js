@@ -69,6 +69,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Login" */ '../views/Login.vue'),
   },
+  {
+    path: '/invoices',
+    name: 'invoices',
+    component: () =>
+      import(/* webpackChunkName: "Invoices" */ '../views/Invoices.vue'),
+    meta: { requiresAuth: true },
+  },
 
   // path: '*' matches any routes / so need to put at the end / the problem is it checks after it loads the path/ so it has possibility to matches
   // thats why we need to use Vue Navigation Guards / like Vue life cycle hooks
@@ -112,6 +119,7 @@ router.beforeEach((to, from, next) => {
     if (!store.user) {
       next({
         name: 'login',
+        query: { redirect: to.fullPath },
       })
     } else {
       next()

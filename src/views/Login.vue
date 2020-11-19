@@ -25,7 +25,9 @@ export default {
     login() {
       // Authenticate against API, but not using now
       store.user = this.username
-      this.$router.push('/user')  // push to user page
+      // this.$router.push('/user')  // push to user page
+      const redirectPath = this.$route.query.redirect || '/';  // Home route if doesnt exist
+      this.$router.push(redirectPath) 
     }
   }
 }
