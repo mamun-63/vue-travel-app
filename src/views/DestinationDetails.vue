@@ -13,9 +13,9 @@
     </section>
     <section class="experiences">
       <h2>Top experiences in {{ destination.name }} </h2>
-      <div class="cards">
+      <div class="cards" id="experience">
         <div v-for="experience in destination.experiences" :key="experience.slug" class="card">
-          <router-link :to="{name: 'experienceDetails', params: {experienceSlug: experience.slug} }">
+          <router-link :to="{name: 'experienceDetails', params: {experienceSlug: experience.slug}, hash: '#experience' }">
             <img :src="require(`../assets/${experience.image}`)" :alt="experience.name">
             <span class="card__text">{{ experience.name }}</span>
           </router-link>
@@ -58,10 +58,14 @@ export default {
 
 <style scoped>
 img {
-  max-width: 500px;
+  max-width: 600px;
   max-height: 400px;
-  height: 300px;
-  object-fit: contain;
+  height: auto;
+  width: 100%;
+}
+
+.experiences {
+  padding: 20px 0;
 }
 
 .destination-details, .cards {

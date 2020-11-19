@@ -3,7 +3,7 @@
     <TheNavigation />
     <!-- name="slide" mode="out-in" -->
     <!-- name="moveUp" -->
-    <transition name="fade">
+    <transition name="fade" mode="out-in">
       <router-view :key="$route.path" />
     </transition>
   </div>

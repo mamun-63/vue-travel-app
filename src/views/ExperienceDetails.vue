@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>Experiences</h1>
     <h2>{{experience.name}}</h2>
     <div class="experience-details">
       <img :src="require(`../assets/${experience.image}`)" :alt="experience.name">
@@ -40,14 +39,16 @@ export default {
 
 <style scoped>
   img {
-    width: 100%;
+    max-width: 600px;
+    max-height: 400px;
     height: auto;
-    object-fit: contain;
+    width: 100%;
   }
 
   .experience-details {
     display: flex;
     justify-content: space-between;
+    padding: 40px 0;
   }
   
   p {

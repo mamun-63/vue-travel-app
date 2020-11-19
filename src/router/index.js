@@ -71,6 +71,23 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   linkExactActiveClass: 'vue-router-active-class',
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      const position = {}
+      if (to.hash) {
+        position.selector = to.hash
+        if (to.hash === '#experience') {
+          position.offset = { y: 140 }
+        }
+        if (document.querySelector(to.hash)) {
+          return position
+        }
+        return false
+      }
+    }
+  },
   routes,
 })
 
