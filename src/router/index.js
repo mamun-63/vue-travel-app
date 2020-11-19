@@ -57,6 +57,19 @@ const routes = [
     },
   },
 
+  {
+    path: '/user',
+    name: 'user',
+    component: () => import(/* webpackChunkName: "User" */ '../views/User.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () =>
+      import(/* webpackChunkName: "Login" */ '../views/Login.vue'),
+  },
+
   // path: '*' matches any routes / so need to put at the end / the problem is it checks after it loads the path/ so it has possibility to matches
   // thats why we need to use Vue Navigation Guards / like Vue life cycle hooks
   {
@@ -89,6 +102,23 @@ const router = new VueRouter({
     }
   },
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  // to.meta.requiresAuth
+  // but destination details has child of experience details/ so need to match both, so
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // if not authenticated, push them to login page
+    if (!store.user) {
+      next({
+        name: 'login',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
